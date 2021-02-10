@@ -8,6 +8,8 @@ const Chat = () =>{
     
     const [msgs, setMsgs] = useState([])
 
+    const [ currm ,setCurrm] = useState('')
+
     const [sMsgs, ssMsgs] =useState({
         message:''
     })
@@ -52,10 +54,6 @@ const Chat = () =>{
         .catch(err =>console.log(err))
 
     }
-
-    setTimeout(()=>{
-        window.location.reload()
-    },2000)
     useEffect(() => {
         getData()
         getMessages()
@@ -72,10 +70,11 @@ const Chat = () =>{
                 {
                     msgs.map((msg,index)=>{
                         const { username, message} =msg
+                        setCurrm(message)
                         if(localStorage.getItem('myData') === username){
-                            return <h3 style={{float:'right',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{message}</h3>
+                            return <h3 style={{float:'right',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{currm}</h3>
                         }else{
-                            return <h3 style={{float:'left',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{message}</h3>
+                            return <h3 style={{float:'left',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{currm}</h3>
                         }
                     })
                 }
