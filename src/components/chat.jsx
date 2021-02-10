@@ -52,6 +52,10 @@ const Chat = () =>{
         .catch(err =>console.log(err))
 
     }
+
+    setTimeout(()=>{
+        window.location.reload()
+    },2000)
     useEffect(() => {
         getData()
         getMessages()
