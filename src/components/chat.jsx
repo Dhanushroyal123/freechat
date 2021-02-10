@@ -56,7 +56,6 @@ const Chat = () =>{
         getData()
         getMessages()
         updateScroll()
-        window.location.reload()
     
     }, [])
 
