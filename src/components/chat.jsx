@@ -44,10 +44,9 @@ const Chat = () =>{
     
 
     const submit = (e)=>{
-        e.preventDefault()
         axios.post('https://freechat-back.herokuapp.com/user/update',{username:cUser,message:sMsgs})
         .then(res => {
-            window.location.reload()
+            console.log(res)
         })
         .catch(err =>console.log(err))
 
