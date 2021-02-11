@@ -24,7 +24,7 @@ const Login = () =>{
         e.preventDefault()
         console.log('submitted')
         axios
-      .post('http://localhost:8080/user/validate', user)
+      .post('https://freechat-back.herokuapp.com/user/validate', user)
       .then((res) => {
         if (res.data.value < 300) {
           localStorage.setItem('myData',user.username)

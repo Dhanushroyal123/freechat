@@ -25,7 +25,7 @@ const Chat = () =>{
      
     const getMessages = () =>{
         console.log(cUser)
-        axios.post('http://localhost:8080/user/getmessages',{username:cUser})
+        axios.post('https://freechat-back.herokuapp.com/user/getmessages',{username:cUser})
         .then(res=> {
             console.log(res.data.value)
             setMsgs(res.data.value)
@@ -48,7 +48,7 @@ const Chat = () =>{
 
     const submit = (e)=>{
         e.preventDefault()
-        axios.post('http://localhost:8080/user/update',{username:cUser,message:sMsgs})
+        axios.post('https://freechat-back.herokuapp.com/user/update',{username:cUser,message:sMsgs})
         .then(res => {
             window.location.reload()
         })
