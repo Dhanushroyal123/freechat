@@ -24,7 +24,7 @@ const Login = () =>{
         e.preventDefault()
         console.log('submitted')
         axios
-      .post('https://freechat-back.herokuapp.com/user/validate', user)
+      .post('http://localhost:8080/user/validate', user)
       .then((res) => {
         if (res.data.value < 300) {
           localStorage.setItem('myData',user.username)
@@ -68,8 +68,8 @@ const Login = () =>{
           )}
           <div className="login-content">
               <form action="" onSubmit={submit}>
-              <input type="text" placeholder="Username" name='username' onChange={handleChange} value={user.username}/><br/>
-              <input type="password" placeholder="Password" name='password' onChange={handleChange} value={user.password}/><br/>
+              <input type="text" placeholder="Username" name='username' onChange={handleChange} value={user.username} required/><br/>
+              <input type="password" placeholder="Password" name='password' onChange={handleChange} value={user.password} required/><br/>
               <input type="submit" value="LOGIN"/>
               </form>
           </div>

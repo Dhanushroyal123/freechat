@@ -21,7 +21,7 @@ const SignUp = () =>{
         e.preventDefault()
         console.log('submitted')
         axios
-      .post('https://freechat-back.herokuapp.com/user/save', user)
+      .post('http://localhost:8080/user/save', user)
       .then((res) => {
           history.push('/')
       })

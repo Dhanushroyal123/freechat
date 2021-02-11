@@ -9,7 +9,7 @@ const Chat = () =>{
     const [msgs, setMsgs] = useState([])
 
     const [sMsgs, ssMsgs] =useState({
-        message:''
+        smessage:''
     })
 
     let cUser = localStorage.getItem('myData')
@@ -25,9 +25,12 @@ const Chat = () =>{
      
     const getMessages = () =>{
         console.log(cUser)
-        axios.post('https://freechat-back.herokuapp.com/user/getmessages',{username:cUser})
-        .then(res=> setMsgs(res.data.value))
-        .catch(err => console.log(err))
+        axios.post('http://localhost:8080/user/getmessages',{username:cUser})
+        .then(res=> {
+            console.log(res.data.value)
+            setMsgs(res.data.value)
+        })
+        .catch(err => console.log('hahahah'))
     }
     const handleChange = (e) =>{
         ssMsgs(e.target.value)   
@@ -45,7 +48,7 @@ const Chat = () =>{
 
     const submit = (e)=>{
         e.preventDefault()
-        axios.post('https://freechat-back.herokuapp.com/user/update',{username:cUser,message:sMsgs})
+        axios.post('http://localhost:8080/user/update',{username:cUser,message:sMsgs})
         .then(res => {
             window.location.reload()
         })
@@ -67,19 +70,22 @@ const Chat = () =>{
             <div  className="chat-feed" ref={messageEl}>
                 {
                     msgs.map((msg,index)=>{
-                        const { username, message} =msg
+                        const { username, smessage } = msg
                         if(localStorage.getItem('myData') === username){
-                            return <h3 style={{float:'right',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{message}</h3>
+                            //console.log('D',msg.message)
+                            return <h3 style={{float:'right',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{smessage}</h3>
                         }else{
-                            return <h3 style={{float:'left',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{message}</h3>
+                            //console.log('P',msg.message)
+                            return <h3 style={{float:'left',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{smessage}</h3>
                         }
+                
                     })
                 }
                 
             </div>
             <div className="message">
                 <form onSubmit={submit}>
-                    <input type="text" placeholder="send a message..." name="message" onChange={handleChange} value={sMsgs.message}/>
+                    <input type="text" placeholder="send a message..." name="smessage" onChange={handleChange} value={sMsgs.smessage}/>
                     <input style={{padding:'8px',margin:'5px',fontSize:'15px',borderRadius:'5px'}} type="submit" value="send"/>
                 </form>
                 
