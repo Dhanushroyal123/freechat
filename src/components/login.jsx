@@ -6,6 +6,7 @@ const Login = () =>{
     let history = useHistory()
     const [user, setUser] = useState({
         username:'',
+        receiver:'',
         password:''
     })
 
@@ -21,13 +22,14 @@ const Login = () =>{
       }
 
     const submit = (e) =>{
+
         e.preventDefault()
         console.log('submitted')
-        axios
-      .post('https://freechat-back.herokuapp.com/user/validate', user)
-      .then((res) => {
+        axios.post('https://freechat-back.herokuapp.com/user/validate', user)
+      .then((res) => { 
         if (res.data.value < 300) {
           localStorage.setItem('myData',user.username)
+          localStorage.setItem('myData2',user.receiver)
           history.push('/chat')
         } else {
           setShow(true)
@@ -69,6 +71,7 @@ const Login = () =>{
           <div className="login-content">
               <form action="" onSubmit={submit}>
               <input type="text" placeholder="Username" name='username' onChange={handleChange} value={user.username} required/><br/>
+              <input type="text" placeholder="Receiver" name='receiver' onChange={handleChange} value={user.receiver} required/><br/>
               <input type="password" placeholder="Password" name='password' onChange={handleChange} value={user.password} required/><br/>
               <input type="submit" value="LOGIN"/>
               </form>

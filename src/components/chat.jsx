@@ -4,7 +4,7 @@ import { useState, useEffect, useRef} from 'react'
 const Chat = () =>{
     const messageEl = useRef(null)
 
-    const [data, setData] = useState('')
+    //const [data, setData] = useState('')
     
     const [msgs, setMsgs] = useState([])
 
@@ -13,15 +13,8 @@ const Chat = () =>{
     })
 
     let cUser = localStorage.getItem('myData')
-    let cdata = localStorage.getItem('myData')
-    const getData = () => {
-        if(cdata === "dhanush"){
-            cdata = "praneeth"
-        }else{
-            cdata = "dhanush"
-        }
-        setData(cdata)
-      }
+    let cUser2 = localStorage.getItem('myData2')
+    //let cdata = localStorage.getItem('myData')
      
     const getMessages = () =>{
         console.log(cUser)
@@ -48,7 +41,7 @@ const Chat = () =>{
 
     const submit = (e)=>{
         e.preventDefault()
-        axios.post('https://freechat-back.herokuapp.com/user/update',{username:cUser,message:sMsgs})
+        axios.post('https://freechat-back.herokuapp.com/user/update',{username:cUser,receiver:cUser2,message:sMsgs})
         .then(res => {
             window.location.reload()
         })
@@ -56,7 +49,7 @@ const Chat = () =>{
 
     }
     useEffect(() => {
-        getData()
+        //getData()
         getMessages()
         updateScroll()
     
@@ -65,21 +58,33 @@ const Chat = () =>{
     return(
         <div className="chat-box">
             <div className="profile-head">
-                 <span style={{textTransform:'capitalize',fontWeight:'bold'}}>{data}</span><span style={{float:'right',clear:'both',background:'linear-gradient(to right, #33cc33, #00ff99)',padding:'5px',color:'white',borderRadius:'10px'}}><a href='/' style={{textDecoration:'none'}}>Logout</a></span>
+                 <span style={{textTransform:'capitalize',fontWeight:'bold'}}>{cUser2}</span><span style={{float:'right',clear:'both',background:'linear-gradient(to right, #33cc33, #00ff99)',padding:'5px',color:'white',borderRadius:'10px'}}><a href='/' style={{textDecoration:'none'}}>Logout</a></span>
             </div>
             <div  className="chat-feed" ref={messageEl}>
-                {
+                {   
                     msgs.map((msg,index)=>{
-                        const { username, smessage } = msg
-                        if(localStorage.getItem('myData') === username){
+                        const { username, withh, smessage} = msg
+                        if(localStorage.getItem('myData') === username && withh === cUser2 ){
                             //console.log('D',msg.message)
                             return <h3 style={{float:'right',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{smessage}</h3>
-                        }else{
+                        }else if(cUser2 === username) {
                             //console.log('P',msg.message)
                             return <h3 style={{float:'left',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{smessage}</h3>
                         }
                 
                     })
+                    
+                   /*
+                    msgs.filter((msg)=>{
+                        const { username, smessage } = msg
+                        if(localStorage.getItem('myData') === username){
+                            return <h3 style={{float:'right',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{smessage}</h3>
+                        }else if(cUser2 === username){
+                            return <h3 style={{float:'left',clear:'both',margin:'10px 10px 10px 10px',background:'linear-gradient(to right, #0066ff, #00ccff)',padding:'6px',color:'white',borderRadius:'6px'}}>{smessage}</h3>
+                        }
+
+                    })
+                    */
                 }
                 
             </div>

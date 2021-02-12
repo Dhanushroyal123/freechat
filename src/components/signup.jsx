@@ -34,9 +34,9 @@ const SignUp = () =>{
           <h1>SIGN UP</h1>
           <div className="login-content">
               <form action="" onSubmit={submit}>
-              <input type="text" placeholder="Username" name='username' onChange={handleChange} value={user.username}/><br/>
-              <input type="email" placeholder="Email" name='email' onChange={handleChange} value={user.email}/><br/>
-              <input type="password" placeholder="Password" name='password' onChange={handleChange} value={user.password}/><br/>
+              <input type="text" placeholder="Username" name='username' onChange={handleChange} value={user.username} required/><br/>
+              <input type="email" placeholder="Email" name='email' onChange={handleChange} value={user.email} required/><br/>
+              <input type="password" placeholder="Password" name='password' onChange={handleChange} value={user.password} required/><br/>
               <input type="submit" value="SignUp"/>
               </form>
           </div>
