@@ -12,8 +12,8 @@ const Chat = () =>{
         smessage:''
     })
 
-    let cUser = localStorage.getItem('myData')
-    let cUser2 = localStorage.getItem('myData2')
+    let cUser = localStorage.getItem('myData').toLowerCase()
+    let cUser2 = localStorage.getItem('myData2').toLowerCase()
     //let cdata = localStorage.getItem('myData')
      
     const getMessages = () =>{
