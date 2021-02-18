@@ -88,9 +88,9 @@ const Chat = () =>{
                 }
                 
             </div>
-            <div className="message">
+            <div style={{backgroundColor:'lightgray'}} className="message">
                 <form onSubmit={submit}>
-                    <input type="text" placeholder="send a message..." name="smessage" onChange={handleChange} value={sMsgs.smessage}/>
+                    <input id="msginp" type="text" placeholder="send a message..." name="smessage" onChange={handleChange} value={sMsgs.smessage}/>
                     <input style={{padding:'8px',margin:'5px',fontSize:'15px',borderRadius:'5px'}} type="submit" value="send"/>
                 </form>
                 
